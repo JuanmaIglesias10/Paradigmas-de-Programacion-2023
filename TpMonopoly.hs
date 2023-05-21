@@ -40,3 +40,15 @@ agregarAccion unaAccion unJugador = unJugador {acciones = unaAccion : acciones u
 
 gritar :: Accion
 gritar unJugador = unJugador {nombre = "AHHHH" ++ nombre unJugador }
+
+subastar :: Propiedad -> Accion
+subastar unaPropiedad  unJugador = sumarPropiedad unaPropiedad . (restarPlata . precioPropiedad $ unaPropiedad)  $ unJugador
+
+restarPlata :: Int -> Jugador -> Jugador
+restarPlata unaCantidad unJugador = unJugador {cantDinero = cantDinero unJugador - unaCantidad}
+
+sumarPropiedad :: Propiedad -> Jugador -> Jugador
+sumarPropiedad unaPropiedad unJugador = unJugador {propiedades = propiedades unJugador ++ [unaPropiedad] }
+
+precioPropiedad :: Propiedad -> Int
+precioPropiedad (_ , precio) = precio
