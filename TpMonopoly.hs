@@ -1,5 +1,7 @@
 import Text.Show.Functions ()
 
+-- LINK TP: https://docs.google.com/document/d/1GMNli3FaVERM-OldRre467gT1LLhGXdXZoRoK7IvoKo/edit
+
 data Jugador = UnJugador {
     nombre :: String,
     cantDinero :: Int,
@@ -52,3 +54,20 @@ sumarPropiedad unaPropiedad unJugador = unJugador {propiedades = propiedades unJ
 
 precioPropiedad :: Propiedad -> Int
 precioPropiedad (_ , precio) = precio
+
+cobrarAlquileres :: Propiedad -> Accion
+cobrarAlquileres unaPropiedad unJugador 
+    | esPropiedadBarata unaPropiedad = unJugador {cantDinero = cantDinero unJugador + 10}
+    | otherwise = unJugador {cantDinero = cantDinero unJugador + 20}
+    
+esPropiedadBarata :: Propiedad -> Bool
+esPropiedadBarata unaPropiedad = precioPropiedad unaPropiedad < 150
+ 
+pagarAAcionistas :: Accion 
+pagarAAcionistas unJugador
+    | esTacticaAccionista unJugador = unJugador {cantDinero = cantDinero unJugador + 200}
+    | otherwise = unJugador {cantDinero = cantDinero unJugador - 100}
+
+esTacticaAccionista :: Jugador -> Bool
+esTacticaAccionista unJugador = (== "Accionista") . tactica $ unJugador 
+
