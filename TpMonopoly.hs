@@ -57,16 +57,19 @@ precioPropiedad (_ , precio) = precio
 
 cobrarAlquileres :: Propiedad -> Accion
 cobrarAlquileres unaPropiedad unJugador 
-    | esPropiedadBarata unaPropiedad = unJugador {cantDinero = cantDinero unJugador + 10}
-    | otherwise = unJugador {cantDinero = cantDinero unJugador + 20}
+    | esPropiedadBarata unaPropiedad = modificarDinero (+10) unJugador
+    | otherwise = modificarDinero (+20) unJugador
     
 esPropiedadBarata :: Propiedad -> Bool
 esPropiedadBarata unaPropiedad = precioPropiedad unaPropiedad < 150
  
 pagarAAcionistas :: Accion 
 pagarAAcionistas unJugador
-    | esTacticaAccionista unJugador = unJugador {cantDinero = cantDinero unJugador + 200}
-    | otherwise = unJugador {cantDinero = cantDinero unJugador - 100}
+    | esTacticaAccionista unJugador  = modificarDinero (+200) unJugador
+    | otherwise = modificarDinero ( subtract 100) unJugador
+
+modificarDinero :: (Int -> Int) -> Jugador -> Jugador
+modificarDinero unMonto unJugador = unJugador {cantDinero = unMonto.cantDinero $ unJugador }
 
 esTacticaAccionista :: Jugador -> Bool
 esTacticaAccionista unJugador = (== "Accionista") . tactica $ unJugador 
