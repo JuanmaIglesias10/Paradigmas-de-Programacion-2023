@@ -56,3 +56,46 @@ golpe unJugador unPalo = unPalo . habilidad $ unJugador
 
 --PUNTO 3
 
+
+data Obstaculo = UnObstaculo {
+  puedeSuperar :: Tiro -> Bool ,
+  efectoLuegoDeSuperar :: Tiro -> Tiro
+} 
+
+intentarSuperarObstaculo :: Obstaculo -> Tiro -> Tiro
+intentarSuperarObstaculo unObstaculo unTiro 
+  | puedeSuperar unObstaculo unTiro = efectoLuegoDeSuperar unObstaculo unTiro
+  | otherwise = tiroDetenido 
+
+tunelConRampa :: Obstaculo 
+tunelConRampa = UnObstaculo superaTunelConRampita efectoTunelConRampa 
+
+superaTunelConRampita :: Tiro -> Bool
+superaTunelConRampita unTiro = precision unTiro > 90 && alRasDelSuelo unTiro
+
+alRasDelSuelo = (==0) . altura
+ 
+efectoTunelConRampa :: Tiro -> Tiro
+efectoTunelConRampa unTiro = unTiro {velocidad = velocidad unTiro *2 , precision = 100 , altura = 0}
+
+tiroDetenido = UnTiro  0 0 0
+
+laguna :: Int -> Obstaculo
+laguna largoLaguna = UnObstaculo superaLaguna (efectoLaguna largoLaguna)
+
+superaLaguna :: Tiro -> Bool
+superaLaguna unTiro = velocidad unTiro > 80 && (between 1 5 . altura) unTiro 
+
+between n m x = elem x [n .. m]
+
+efectoLaguna :: Int -> Tiro -> Tiro
+efectoLaguna largoLaguna unTiro = unTiro { altura = altura unTiro `div` largoLaguna }
+
+hoyo :: Obstaculo
+hoyo = UnObstaculo superaHoyo efectoHoyo
+
+superaHoyo :: Tiro -> Bool
+superaHoyo unTiro = (between 5 10 . velocidad) unTiro && alRasDelSuelo unTiro && precision unTiro > 95 
+
+efectoHoyo :: Tiro -> Tiro
+efectoHoyo unTiro = tiroDetenido 
