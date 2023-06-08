@@ -1,8 +1,7 @@
 
 import Text.Show.Functions ()
-import Language.Haskell.TH (BangType)
 import Data.Char (toUpper)
-import System.Win32.DebugApi (DebugEventId)
+
 
 data Barbaro = UnBarbaro {
     nombre :: String,
