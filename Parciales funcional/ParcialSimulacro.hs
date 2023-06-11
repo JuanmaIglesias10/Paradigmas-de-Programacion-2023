@@ -112,6 +112,7 @@ tieneElMejorPlato unParticipante otroParticipante
 
 -- Parte D
 
-platinum :: Plato
-platinum = UnPlato 10 (repeat ("carne",100))
+unaListaDecomponentesRara :: [Componente]
+unaListaDecomponentesRara =
+  map (\unNumero -> ("Ingrediente " ++ show unNumero, unNumero)) [1..]
 
