@@ -35,6 +35,9 @@ data Heroe = UnHeroe{
 type Artefacto = Int
 type Tarea = Heroe -> Heroe
 
+marquitos :: Heroe
+marquitos = UnHeroe "Marquitos" "Loco" 100 [] []
+
 ---- PUNTO 2 ----
 
 pasarALaHistoria :: Heroe -> Heroe
@@ -60,5 +63,6 @@ escalarElOlimpo :: Tarea
 escalarElOlimpo  = ganarReconocimiento 500 . modificarArtefactos rarificar . agregarArtefacto relampagoDeZeus
     where rarificar = filter (>1000) . map (*3)
 
-
+cruzarLaCalle :: Int -> Tarea
+cruzarLaCalle unasCuadras = setEpiteto ("Groso" ++ replicate unasCuadras 'o')
 
