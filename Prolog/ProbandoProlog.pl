@@ -1,1 +1,0 @@
-escribio(elsaBornemann, socorro).

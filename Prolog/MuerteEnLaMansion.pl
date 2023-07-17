@@ -14,38 +14,40 @@ vive(mayordomo , mansionDreadbury).
 vive(charles   , mansionDreadbury).
 
 odia(tiaAgatha , charles).
+odia(tiaAgatha , tiaAgatha).
 odia(charles   , mayordomo).
-odia(charles   , tiaAgatha).
 odia(mayordomo , charles).
+odia(mayordomo , tiaAgatha).
 
 masRicoQue(mayordomo , tiaAgatha).
 
+/*
+ 1a
+   Consulta utilizada: ?- mata(Persona,tiaAgatha).
+ 1b
+   Respuesta: Persona = charles.
 
-% 1a
-%   Consulta utilizada: ?- mata(Persona,tiaAgatha).
-% 1b
-%   Respuesta: Persona = charles.
+ 2
+   ?- odia(Persona,milhouse).
+       false.
 
-% 2
-%   ?- odia(Persona,milhouse).
-%        false.
+   ?- odia(charles,Quien).
+   Quien = mayordomo ;
+   Quien = tiaAgatha.
 
-%   ?- odia(charles,Quien).
-%   Quien = mayordomo ;
-%   Quien = tiaAgatha.
+   ?- odia(Quien,tiaAgatha).
+    Quien = charles.
 
-%   ?- odia(Quien,tiaAgatha).
-%    Quien = charles.
+   ?- odia(Odiador,Odiado).
+   Odiador = tiaAgatha,
+   Odiado = charles ;
+   Odiador = charles,
+   Odiado = mayordomo ;
+   Odiador = charles,
+   Odiado = tiaAgatha ;
+   Odiador = mayordomo,
+   Odiado = charles.
 
-%   ?- odia(Odiador,Odiado).
-%   Odiador = tiaAgatha,
-%   Odiado = charles ;
-%   Odiador = charles,
-%   Odiado = mayordomo ;
-%   Odiador = charles,
-%   Odiado = tiaAgatha ;
-%   Odiador = mayordomo,
-%   Odiado = charles.
-
-%   ?- odia(mayordomo,_).
-%      true.
+   ?- odia(mayordomo,_).
+       true.
+*/
