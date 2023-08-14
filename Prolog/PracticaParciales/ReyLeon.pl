@@ -70,12 +70,12 @@ peso(scar, 300).
 peso(shenzi, 400).
 peso(banzai, 500).
 
-%1
+%a
 
-cuantoEngorda(Personaje,Peso):-
+cuantoEngorda(Personaje,Cantidad):-
     comio(Personaje,_),
-    findall(Peso,pesoBichoComido(Personaje,_,Peso),Pesos),
-    sum_list(Pesos,Peso).
+    findall(Peso,pesoBichoComido(Personaje,_,Peso),PesosComidos),
+    sum_list(PesosComidos,Cantidad).
 
 pesoBichoComido(Personaje,Bicho,Peso):-
     comio(Personaje,Bicho),
@@ -88,5 +88,29 @@ pesoDeBicho(hormiga(_),Peso):-
 
 pesoDeBicho(cucaracha(_,_,Peso),Peso).
 
-%2
+%b
+
+cuantoEngorda(Personaje,Cantidad):-
+    persigue(Personaje,_),
+    findall(Peso, pesoPerseguido(Personaje,_,Peso),ListaDePesosPerseguidos),
+    findall(Peso, pesoBichoComido(Personaje,_,Peso),ListaDePesoscomidos),
+    append(ListaDePesoscomidos,ListaDePesosPerseguidos,ListaDePesosTotales),
+    sum_list(ListaDePesosTotales,Cantidad).
+
+pesoPerseguido(Personaje,Animal,Peso):-
+    persigue(Personaje,Animal),
+    peso(Animal,Peso).
+
+persigueYComio(Personaje):-
+    comio(Personaje,_),
+    persigue(Personaje,_).
+
+%3
+
+persigue(scar,mufasa).
+
+rey(Personaje):-
+    persigue(scar,Personaje),
+    not(persigue(Personaje,_)),
+    not(comio(Personaje,_)).
 
