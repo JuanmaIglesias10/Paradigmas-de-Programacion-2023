@@ -1,0 +1,83 @@
+@startuml DiagramaIMdeP
+
+class Pelicula {
+    nombre
+    elenco
+--
+    sueldoTotalDelElenco()
+    presupuesto()
+    ganancia()
+    recaudacion()
+    rodar()
+}
+
+class Drama extends Pelicula {
+--
+    recaudacionAdicional()
+    recaudacion()
+}
+
+class Accion extends Pelicula {
+    vidriosRotos
+--
+    presupuesto()
+    recaudacionAdicional()
+    recaudacion()
+}
+
+class Terror extends Pelicula {
+    cantidadDeCuchos
+--
+    recaudacionAdicional()
+    recaudacion()
+}
+
+class Artista {
+    experiencia
+    cantidadDePeliculasQueActuo
+    ahorros
+--
+    sueldo(unArtista)
+    recategorizar()
+    actuar()
+}
+
+interface Experiencia {
+    sueldo(unArtista)
+    experienciaRecategorizable(unArtista)
+}
+
+object amateur {
+    --
+    sueldo(unArtista)
+    experienciaRecategorizable(unArtista)
+}
+
+object establecido {
+    --
+    sueldo(unArtista)
+    experienciaRecategorizable(unArtista)
+}
+
+object estrella {
+    --
+    sueldo(unArtista)
+    experienciaRecategorizable(unArtista)
+}
+
+object impdep {
+    --
+    mejorSueldo(unosArtistas)
+    nombresDePeliculasEconomicas(unasPeliculas)
+    gananciasDePeliculasEconomicas(unasPeliculas)
+    recategorizarArtistas(unosArtistas)
+}
+
+impdep .left.> Pelicula
+impdep ..> Artista
+amateur ..|> Experiencia
+establecido ..|> Experiencia
+estrella ..|> Experiencia
+Artista -up-> Experiencia
+Pelicula -up-> "*" Artista : artistas 
+@enduml

@@ -113,4 +113,3 @@ rey(Personaje):-
     persigue(scar,Personaje),
     not(persigue(Personaje,_)),
     not(comio(Personaje,_)).
-
