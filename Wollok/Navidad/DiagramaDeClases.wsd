@@ -1,0 +1,72 @@
+@startuml DiagramaDeClases
+
+class ArbolNavidenio {
+    regalos
+    tarjetas
+    adornos
+
+    {abstract} capacidadParaContenerRegalos()
+    agregarUnRegalo(unRegalo)
+    beneficiarios()
+    costoTotalRegalos()
+    importanciaAdornosDelArbol()
+    esArbolPortentoso()
+    adornoMasPesado()
+}
+
+class ArbolNatural extends ArbolNavidenio {
+    vejez
+    tamanioTronco
+    capacidadParaContenerRegalos()
+}
+
+class ArbolArtificial extends ArbolNavidenio {
+    cantidadDeVaras
+    capacidadParaContenerRegalos()
+}
+
+class Adorno {
+    pesoBase
+    coeficienteDeSuperioridad
+    importancia()
+    peso()
+}
+
+class Luz extends Adorno {
+    cantidadDeLamparitas
+    luminosidad()
+    importancia()
+}
+
+class FiguraElaborada extends Adorno {
+    volumen
+    importancia()
+}
+
+class Guirnalda extends Adorno {
+    anioDeCompra
+    aniosEnUso()
+    pelosPerdidos()
+    peso()
+}
+
+class Regalo {
+    precio
+    destinatario
+    precioPromedio
+    esTeQuierenMucho()
+}
+
+class Tarjeta {
+    destinatario
+    valorAdjunto
+    precio
+    valorAdjunto()
+    
+
+}
+
+ArbolNavidenio "*" --> Adorno : adornos
+ArbolNavidenio "*" --> Regalo : regalos
+ArbolNavidenio "*" --> Tarjeta : tarjetas
+@enduml
