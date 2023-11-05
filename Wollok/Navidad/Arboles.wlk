@@ -22,9 +22,8 @@ class ArbolNavidenio {
 		throw new NoHayMasCapacidad(message = "No hay mas capacidad para contener regalos en el arbol!")
 	}
 	method beneficiarios() {
-		const beneficiariosRegalos = regalos.map{regalo => regalo.destinatario()}
-		const beneficiariosTarjetas = tarjetas.map{tarjeta => tarjeta.destinatario()}
-		return beneficiariosRegalos + beneficiariosTarjetas
+		return regalos.map{regalo => regalo.destinatario()}
+		  	 + tarjetas.map{tarjeta => tarjeta.destinatario()}
 	}
 	method costoTotalRegalos() = self.precioTotalRegalos()
 	method importanciaAdornosDelArbol() = adornos.sum{adorno => adorno.importancia()}
