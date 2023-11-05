@@ -1,0 +1,74 @@
+@startuml diagramaDeClases
+
+class BarcoPirata implements Objetivo {
+    mision
+    tripulantes
+    capacidad
+    
+    puedeAnimarseASaquear(unPirata)
+    incorporarALaTripulacion(unPirata)
+    cambiarDeMision(unaNuevaMision)
+    pirataMasEbrio()
+    anclarEnCiudadCostera(unaCiudad)
+    esVulnerableA(unBarco)
+    esTemible()
+    cantidadDePasadosDeGrogXD()
+    cantidadItemsPasadosDeGrogXDDistintos()
+    tripulantePasadoDeGrogXDMasRico()
+    tripulanteQueMasInvito()
+}
+
+class Pirata {
+    nivelDeEbriedad
+    numeroDeMonedas
+    itemsDisponibles
+    invitadoPor
+    
+    esUtilParaLaMisionDe(unBarco)
+    puedeFormarParteDeLaTripulacion(unBarco)
+    seAnimaASaquear(unObjetivo)
+
+}
+
+class EspiaDeLaCorona extends Pirata{
+    estaPasadoDeGrogXD()
+    seAnimaASaquear(unObjetivo)
+}
+
+class Mision {
+{abstract} esUtil(unPirata)
+    puedeSerRealizada(unBarco)
+}
+
+class BusquedaDelTesoro extends Mision{
+    esUtil(unPirata)
+    puedeSerRealizadaPor(unBarco)
+}
+
+class ConvertirseEnLeyenda extends Mision{
+    itemObligatorio
+    esUtil(unPirata)
+}
+
+class Saqueo extends Mision{
+    victima
+    esUtil(unPirata)
+    puedeSerRealizadaPor(unBarco)
+}
+
+class CiudadCostera implements Objetivo {
+    habitantes
+    puedeAnimarseASaquear(unPirata)
+    esVulnerableA(unBarco)
+}
+
+interface Objetivo {
+    puedeAnimarseASaquear(unPirata)
+    esVulnerableA(unBarco)
+}
+
+Mision ..> Pirata
+BarcoPirata --> "*" Pirata : piratas
+BarcoPirata --> Mision
+Saqueo --> Objetivo
+@enduml
