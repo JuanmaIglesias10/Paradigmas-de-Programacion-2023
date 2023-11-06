@@ -1,0 +1,43 @@
+@startuml DiagramaDeClasesDangerZone
+
+class Empleado {
+    habilidades
+    salud
+    puesto
+
+    estaIncapacitado()
+   
+}
+
+interface Puesto {
+    saludCritica()
+
+}
+
+object puestoEspia{
+    --
+    saludCritica()
+}
+
+class PuestoOficinista implements Puesto {
+    cantEstrellas
+    --
+    saludCritica()
+}
+
+class Jefe extends Empleado{
+    subordinados
+
+    poseeHabilidad(unaHabilidad)
+    algunoLaPuedeUsar(unaHabilidad) 
+}
+
+class Mision {
+    habilidadesRequeridas
+    peligrosidad
+}
+
+Empleado -up-> Puesto
+puestoEspia .left.|> Puesto
+
+@enduml

@@ -1,0 +1,71 @@
+@startuml DiagramaDeclasesCodigo
+
+class SalaDeEscape{
+    nombre
+    dificultad
+
+    precio()
+    esSalaDificil()
+}
+
+class SalaDeAnime extends SalaDeEscape {
+    precio()
+}
+
+class SalaDeHistoria extends SalaDeEscape {
+    basadaEnHechosReales
+    precio()
+    esSalaDificil()
+} 
+
+class SalaDeTerror extends SalaDeEscape{
+    cantidadDeSustos
+    haySuficientesSustos()
+    precio()
+    esSalaDificil()
+}
+
+class Escapista {
+    maestria
+    salasQueSalio
+    saldo
+
+    cumpleLasCondicionesParaSubir()
+    puedeSalir(unEscapista,unaSala)
+    subirNivelDeMaestria()
+    nombreDeLasSalasQueSalio()     
+}
+
+interface Maestria{
+    puedeSalir(unEscapista,unaSala)
+    puedeSubirDeNivel()
+}
+
+object amateur {
+    puedeSalir(unEscapista,unaSala)
+    cumpleLasCondicionesParaSubir()
+    puedeSubirDeNivel()
+}
+
+object profesional {
+    puedeSalir(unEscapista,unaSala)
+    puedeSubirDeNivel()
+}
+
+class Equipo {
+    integrantes
+    puedenSalirDe(unaSala)
+    puedenPagar(unaSala)
+    escapar(unaSala)
+}
+
+amateur ..|> Maestria
+profesional ..|> Maestria
+Escapista --> Maestria
+Equipo --> "*" Escapista : escapista
+Escapista ..> SalaDeEscape
+Equipo ..> SalaDeEscape
+
+
+
+@enduml
